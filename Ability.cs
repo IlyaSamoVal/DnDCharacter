@@ -15,7 +15,8 @@
             set { _value = value; }
         }
     }
-    internal enum Abilities
+
+    public enum Abilities
     {
         Strength,
         Dexterity,

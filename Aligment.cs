@@ -2,14 +2,14 @@
 {
     public class Aligment
     {
-        internal enum AligmentLawOrChaos
+        public enum AligmentLawOrChaos
         {
             Lawful,
             Neutral,
             Chaotic
         }
 
-        internal enum AligmentGoodOrEvil
+        public enum AligmentGoodOrEvil
         {
             Good,
             Neutral,

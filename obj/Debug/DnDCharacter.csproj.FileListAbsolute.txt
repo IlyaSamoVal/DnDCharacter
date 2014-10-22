@@ -1,0 +1,5 @@
+c:\users\sivalent\documents\visual studio 2013\Projects\DnDCharacter\DnDCharacter\obj\Debug\DnDCharacter.csprojResolveAssemblyReference.cache
+c:\users\sivalent\documents\visual studio 2013\Projects\DnDCharacter\DnDCharacter\bin\Debug\DnDCharacter.dll
+c:\users\sivalent\documents\visual studio 2013\Projects\DnDCharacter\DnDCharacter\bin\Debug\DnDCharacter.pdb
+c:\users\sivalent\documents\visual studio 2013\Projects\DnDCharacter\DnDCharacter\obj\Debug\DnDCharacter.dll
+c:\users\sivalent\documents\visual studio 2013\Projects\DnDCharacter\DnDCharacter\obj\Debug\DnDCharacter.pdb

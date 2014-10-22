@@ -1,36 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DnDCharacter
 {
     public class Race
     {
-        private readonly String _name;
-        private readonly String _description;
         private readonly List<String> _prefferedNames;
         private readonly List<Feat> _feats;
-        private readonly Dictionary<String, Ability> _abilityBonuses;
+        private readonly Dictionary<Abilities, Ability> _abilityBonuses;
         private readonly AdventurerClass _prefferedAdventurerClass;
         private static readonly Dictionary<String, Race> Races=new Dictionary<string, Race>();
-        private Race(string name, string description, List<string> prefferedNames, List<Feat> feats, Dictionary<string, Ability> abilityBonuses, AdventurerClass prefferedAdventurerClass)
+        private Race(string name, string description, List<string> prefferedNames, List<Feat> feats, Dictionary<Abilities, Ability> abilityBonuses, AdventurerClass prefferedAdventurerClass)
         {
-            _name = name;
-            _description = description;
+            Name = name;
+            Description = description;
             _prefferedNames = prefferedNames;
             _feats = feats;
             _abilityBonuses = abilityBonuses;
             _prefferedAdventurerClass = prefferedAdventurerClass;
         }
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name { get; private set; }
 
-        public string Description
-        {
-            get { return _description; }
-        }
+        public string Description { get; private set; }
 
         public List<string> PrefferedNames
         {
@@ -42,7 +35,7 @@ namespace DnDCharacter
             get { return _feats; }
         }
 
-        public Dictionary<string, Ability> AbilityBonuses
+        public Dictionary<Abilities, Ability> AbilityBonuses
         {
             get { return _abilityBonuses; }
         }
@@ -52,9 +45,9 @@ namespace DnDCharacter
             get { return _prefferedAdventurerClass; }
         }
 
-        public static List<Race> GetRaces()
+        public static List<String> GetRaces()
         {
-            return new List<Race>(Races.Values);
+            return new List<string>(Races.Keys);
         }
 
         public static Race GetRace(String raceName)
@@ -67,7 +60,7 @@ namespace DnDCharacter
         }
 
         public static bool AddNewRace(string name, string description, List<string> prefferedNames, List<Feat> feats,
-            Dictionary<string, Ability> abilityBonuses, AdventurerClass prefferedAdventurerClass)
+            Dictionary<Abilities, Ability> abilityBonuses, AdventurerClass prefferedAdventurerClass)
         {
             if (IsRaceExist(name))
             {

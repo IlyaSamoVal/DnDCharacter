@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DnDCharacter
 {
-    class Skills
+    public class Skills
     {
-        private Dictionary<String, Skill> skills;
-        public Skill this[String SkillName]
+        private readonly Dictionary<String, Skill> _skills;
+
+        public Skills(Dictionary<string, Skill> skills)
         {
-            get { return skills[SkillName]; }
+            _skills = skills;
+        }
+
+        public Skills()
+        {
+            _skills = new Dictionary<string, Skill>();
+        }
+
+        public Skill this[String skillName]
+        {
+            get { return _skills[skillName]; }
         }
 
         public List<String> GetSkillList()
         {
-            return new List<string>(skills.Keys);
+            return new List<string>(_skills.Keys);
         } 
+
         internal void LevelUpSkills(int level)
         {
-            foreach (var skill in skills.Values)
+            foreach (var skill in _skills.Values)
             {
                 if (skill.IsClassSkill)
                 {

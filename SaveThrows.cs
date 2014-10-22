@@ -1,6 +1,6 @@
 ﻿namespace DnDCharacter
 {
-    class SaveThrows
+    public class SaveThrows
     {
         public int WillSave { get; set; }
 
