@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="Ability.cs" />
     <Compile Include="AdventurerClass.cs" />
     <Compile Include="Aligment.cs" />
@@ -52,7 +53,9 @@
     <Compile Include="Race.cs" />
     <Compile Include="SaveThrows.cs" />
     <Compile Include="Skill.cs" />
-    <Compile Include="Skills.cs" />
+    <Compile Include="SkillList.cs" />
+    <Compile Include="Spell.cs" />
+    <Compile Include="SpellList.cs" />
     <Compile Include="Veapon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

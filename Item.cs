@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DnDCharacter
+﻿namespace DnDCharacter
 {
     public class Item
     {
@@ -12,9 +10,7 @@ namespace DnDCharacter
         }
 
         public string Name { get; private set; }
-
         public int Cost { get; private set; }
-
         public int Weight { get; private set; }
     }
 }

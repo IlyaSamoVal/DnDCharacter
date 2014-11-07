@@ -2,40 +2,15 @@
 {
     public class Aligment
     {
-        public enum AligmentLawOrChaos
+        
+
+        public Aligment(Enums.AligmentGoodOrEvil goodOrEvil, Enums.AligmentLawOrChaos lawOrChaos)
         {
-            Lawful,
-            Neutral,
-            Chaotic
+            GoodOrEvil = goodOrEvil;
+            LawOrChaos = lawOrChaos;
         }
 
-        public enum AligmentGoodOrEvil
-        {
-            Good,
-            Neutral,
-            Evil
-        }
-        private AligmentGoodOrEvil _goodOrEvil;
-        private AligmentLawOrChaos _lawOrChaos;
-
-        public Aligment(AligmentGoodOrEvil goodOrEvil, AligmentLawOrChaos lawOrChaos)
-        {
-            _goodOrEvil = goodOrEvil;
-            _lawOrChaos = lawOrChaos;
-        }
-
-        public AligmentGoodOrEvil GoodOrEvil
-        {
-            get { return _goodOrEvil; }
-            set { _goodOrEvil = value; }
-        }
-
-        public AligmentLawOrChaos LawOrChaos
-        {
-            get { return _lawOrChaos; }
-            set { _lawOrChaos = value; }
-        }
+        public Enums.AligmentGoodOrEvil GoodOrEvil { get; set; }
+        public Enums.AligmentLawOrChaos LawOrChaos { get; set; }
     }
-
-    
 }

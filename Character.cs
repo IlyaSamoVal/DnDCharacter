@@ -5,29 +5,34 @@ namespace DnDCharacter
 {
     public class Character
     {
-        private Race _race;
-        private AdventurerClass _adventurerClass;
+        private List<AdventurerClass> _adventurerClasses;
+        private List< Feat > _feats;
         private byte _level;
+        private Race _race;
 
-        public Character(string name, Race race, AdventurerClass adventurerClass, Dictionary<Abilities, Ability> abilities, int maxHp)
+        public Character(string name, Race race, AdventurerClass adventurerClass,
+            Dictionary< Enums.Abilities, Ability > abilities)
         {
             Name = name;
-            _race = race;
-            _adventurerClass = adventurerClass;
+            Stuff = new List< Item >();
+            Veapons = new List< Veapon >();
+            Armor = new List< Armor >();
+            SkillList = new SkillList();
+            Feats = new List< Feat >();
+            SpellList = new SpellList();
+            Race = race;
+            AdventurerClasses = new List< AdventurerClass > {adventurerClass};
             _level = 1;
-            Aligment = new Aligment(Aligment.AligmentGoodOrEvil.Neutral,Aligment.AligmentLawOrChaos.Neutral);
+            Aligment = new Aligment(Enums.AligmentGoodOrEvil.Neutral, Enums.AligmentLawOrChaos.Neutral);
             Abilities = abilities;
-            Stuff = new List<Item>();
-            Veapons = new List<Veapon>();
-            Armor = new List<Armor>();
-            SaveThrows = _adventurerClass.ClassSaveThrows;
-            CurrentHp = _adventurerClass.HpDice.DiceValue;
-            MaxHp = maxHp;
-            CurrentHp = maxHp;
-            Feats = new List<Feat>();
-            Skills = new Skills();
-            HpDice = _adventurerClass.HpDice;
+            SaveThrows = adventurerClass.ClassSaveThrows[adventurerClass.Level-1];
+            MaxHp = adventurerClass.HpDice.DiceValue + Abilities[Enums.Abilities.Constitution].Modifier;
+            CurrentHp = MaxHp;
+            HpDice = adventurerClass.HpDice;
+            BaseAttack = adventurerClass.BaseAttackBonusesPerLevel[ adventurerClass.Level - 1 ];
         }
+
+        public SpellList SpellList { get; set; }
 
         public string Name { get; set; }
 
@@ -36,22 +41,29 @@ namespace DnDCharacter
             get { return _race; }
             set
             {
-                if (value == _race) return;
+                if ( value == _race ) return;
                 Feats.RemoveAll(feat => _race.Feats.Contains(feat));
                 _race = value;
                 Feats.AddRange(_race.Feats);
             }
         }
 
-        public AdventurerClass AdventurerClass
+        public List< AdventurerClass > AdventurerClasses
         {
-            get { return _adventurerClass; }
+            get { return _adventurerClasses; }
             set
             {
-                if (_adventurerClass == value) return;
-                Feats.RemoveAll(feat => _adventurerClass.ClassFeats.Contains(feat));
-                _adventurerClass = value;
-                Feats.AddRange(_adventurerClass.ClassFeats.Where(feat => feat.Prerequisite(this)));
+                if ( _adventurerClasses == value ) return;
+                foreach ( var @class in _adventurerClasses )
+                {
+                    Feats.RemoveAll(feat => @class.ClassFeats.Contains(feat));
+                    
+                }
+                _adventurerClasses = value;
+                foreach ( var @class in _adventurerClasses )
+                {
+                    Feats.AddRange(@class.ClassFeats.Where(feat => feat.Prerequisite(this)));
+                }
             }
         }
 
@@ -61,32 +73,36 @@ namespace DnDCharacter
             set
             {
                 _level = value;
-                Skills.LevelUpSkills(_level);
+                SkillList.LevelUpSkills(_level);
             }
         }
 
         public Aligment Aligment { get; set; }
-
-        public Dictionary<Abilities, Ability> Abilities { get; private set; }
-
-        public List<Item> Stuff { get; private set; }
-
-        public List<Veapon> Veapons { get; private set; }
-
-        public List<Armor> Armor { get; private set; }
-
+        public Dictionary< Enums.Abilities, Ability > Abilities { get; private set; }
+        public List< Item > Stuff { get; private set; }
+        public List< Veapon > Veapons { get; private set; }
+        public List< Armor > Armor { get; private set; }
         public SaveThrows SaveThrows { get; private set; }
-
         public int CurrentHp { get; set; }
-
         public int MaxHp { get; set; }
 
-        public List<Feat> Feats { get; private set; }
+        public List< Feat > Feats
+        {
+            get { return _feats; }
+            private set
+            {
+                _feats = value;
+                foreach ( var @class in AdventurerClasses )
+                {
+                    _feats.AddRange(@class.ClassFeats);
+                }
+                _feats.AddRange(Race.Feats);
+            }
+        }
 
-        public Skills Skills { get; private set; }
-
+        public SkillList SkillList { get; private set; }
         public Dice HpDice { get; private set; }
-
-        public CharDescription CDescription { get; private set; }
+        public CharDescription CDescription { get; set; }
+        public List< int > BaseAttack { get; private set; }
     }
 }

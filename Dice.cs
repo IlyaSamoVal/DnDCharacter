@@ -4,8 +4,8 @@ namespace DnDCharacter
 {
     public class Dice
     {
-        private readonly Random _rnd;
         private readonly int _count;
+        private readonly Random _rnd;
 
         public Dice(int count, int dice)
         {
@@ -16,7 +16,7 @@ namespace DnDCharacter
 
         public Dice(int count, int dice, int seed)
         {
-            _rnd=new Random(seed);
+            _rnd = new Random(seed);
             _count = count;
             DiceValue = dice;
         }
@@ -25,10 +25,10 @@ namespace DnDCharacter
 
         public int[] ThrowDice()
         {
-            var ret = new int[_count];
-            for (var i = 0; i < _count; i++)
+            var ret = new int[ _count ];
+            for ( var i = 0; i < _count; i++ )
             {
-                ret[i] = _rnd.Next(DiceValue) + 1;
+                ret[ i ] = _rnd.Next(DiceValue) + 1;
             }
             return ret;
         }
@@ -36,12 +36,11 @@ namespace DnDCharacter
         public int ThrowAndSumDice()
         {
             var ret = 0;
-            for (var i = 0; i < _count; i++)
+            for ( var i = 0; i < _count; i++ )
             {
                 ret += _rnd.Next(DiceValue) + 1;
             }
             return ret;
         }
-
     }
 }
